@@ -56,6 +56,11 @@ public class GeneratorPasswordService {
     	    password.append(SPECIAL_CHARS.charAt(random.nextInt(SPECIAL_CHARS.length())));
     	}
 
+        while (password.length() < length) {
+            int randomIndex = random.nextInt(charPool.length());
+            password.append(charPool.charAt(randomIndex));
+        }
+    	
     	String shuffledPassword = shuffleString(password.toString());
     	
         GeneratorPassword passwordEntity = new GeneratorPassword();
