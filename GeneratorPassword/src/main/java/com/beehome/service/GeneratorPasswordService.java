@@ -25,11 +25,16 @@ public class GeneratorPasswordService {
     public GeneratorPasswordRepository passwordRepository;
 
     public String generatePassword(int length, boolean upperCase, boolean lowerCase, boolean numbers, boolean specialChars) {
+    	if (length < 6 || length > 20) {
+            throw new IllegalArgumentException("Password length must be between 6 and 20 characters.");
+        }
+    	
     	StringBuilder charPool = new StringBuilder();
     	if (upperCase) charPool.append(UPPER_CASE);
     	if (lowerCase) charPool.append(LOWER_CASE);
     	if (numbers) charPool.append(NUMBERS);
     	if (specialChars) charPool.append(SPECIAL_CHARS);
+    	
 
     	if (charPool.length() == 0) {
     	    throw new IllegalArgumentException("At least one character type must be selected.");
